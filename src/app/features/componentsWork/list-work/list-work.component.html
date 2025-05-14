@@ -1,0 +1,32 @@
+<app-layout-page-main title="Obra" labelInput="Pesquisar obra" placeHolderInput="Insira o id ou nome" nameRegister="Add. Obra" (outPutAddRole)="navCreateWork()" (searchInput)="searchL.set($event)">
+    <section>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Nome obra</th>
+                <th>Inicio obra</th>
+                <th>Final obra</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+            @for (item of getListWork()?.content; track $index) {
+                <tr>
+                    <td style="text-decoration: underline; color: rgb(47, 115, 240); font-weight: 700;"><a [routerLink]="['../work', item.id]">{{item.id}}</a></td>
+                    <td>{{item.nameWork}}</td>
+                    <td>{{item.startWork | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{item.finalWork | date: 'dd/MM/yyyy'}}</td>
+                    <td><button class="btn-edit btn-table" style="height: 38px;" [routerLink]="['../work', item.id]"><span class="material-symbols-sharp">
+                        edit
+                    </span></button></td>
+                    <td><button class="btn-delete btn-table" style="height: 38px;"><span class="material-symbols-sharp">
+                        delete
+                    </span></button></td>
+                </tr>
+            }
+        </table>
+    </section>
+    <!--<app-paginator [pageable]="getListRole()?.page"
+    (nextPageOutPut)="handlePageEvent($event)"
+    (previousPageOutPut)="handlePageEvent($event)"
+    />-->
+</app-layout-page-main>

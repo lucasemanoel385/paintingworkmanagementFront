@@ -1,0 +1,43 @@
+<app-layout-page-main title="Cargo" labelInput="Pesquisar cargo" placeHolderInput="Insira o id ou nome" nameRegister="Add. Cargo" (outPutAddRole)="modalAdd.open()" (searchInput)="searchL.set($event)">
+    <section>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Nome cargo</th>
+                <th>Pagamento mes</th>
+                <th>Pagamento dia</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @for (item of getListRole()?.content; track $index) {
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.nameRole}}</td>
+                    <td>{{item.monthlyPayment | currency: 'BRL'}}</td>
+                    <td>{{item.dailyPayment | currency: 'BRL'}}</td>
+                    <td><button class="btn-edit btn-table" style="height: 38px;"><span class="material-symbols-sharp">
+                        edit
+                    </span></button></td>
+                    <td><button class="btn-delete btn-table" style="height: 38px;"><span class="material-symbols-sharp">
+                        delete
+                    </span></button></td>
+                </tr>
+            }
+        </table>
+    </section>
+    <app-dialog #modalAdd title="Registrar cargo">
+        <form class="register-content-dialog" [formGroup]="roleForm">
+            <app-input-custom labelInput="Nome do cargo" type="text" placeholder="Insira o nome do cargo" [control]="getControl('nameRole')" [required]="true"/>
+            <app-input-custom labelInput="Valor mensal" type="number" placeholder="Insira o valor pago no mes" [control]="getControl('monthlyPayment')" [required]="true"/>
+            <app-input-custom labelInput="Valor diario" type="number" placeholder="Insira o valor pago diario" [control]="getControl('dailyPayment')" [required]="true"/>
+            <div class="btns-dialog">
+                <button class="btn btn-save" [disabled]="!roleForm.valid" (click)="submitCreateRole()">{{ buttonSubmit() }}</button>
+                <button class="btn btn-delete" (click)="modalAdd.close()">Fechar</button>
+            </div>
+        </form>
+    </app-dialog>
+    <!--<app-paginator [pageable]="getListRole()?.page"
+    (nextPageOutPut)="handlePageEvent($event)"
+    (previousPageOutPut)="handlePageEvent($event)"
+    />-->
+</app-layout-page-main>

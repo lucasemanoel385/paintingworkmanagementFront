@@ -1,0 +1,76 @@
+  .dialog {
+    width: 500px;
+    padding: 20px 20px 30px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    outline: 0;
+    background-color: #2e2e3e;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.dialog::backdrop {
+    background-color: rgb(0 0 0 / .5);
+}
+
+.dialog-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+
+    h2{
+        color: #bdbdbd;
+    }
+}
+
+p{
+    font-weight: 600;
+    color: #bdbdbd;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.line {
+    background-color: rgb(145, 216, 38);
+    height: 3px;
+    animation-name: line-animation;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    border: 0;
+}
+
+.line1 {
+    background-color: rgb(145, 216, 38);
+    height: 3px;
+    animation-name: line-animation;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    border: 0;
+}
+
+@keyframes line-animation {
+    to{
+        width: 100%;
+    } 
+    from {
+        width: 33%;
+    }
+    
+}

@@ -1,0 +1,78 @@
+:host {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 250px;
+    height: 100%;
+
+    aside {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        height: 100%;
+        width: 100%;
+        border-radius: 0px 10px 10px 0px;
+        background-color: #1e1e2f;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1em;
+        width: 80%;
+        height: 100%;
+        margin-left: 8px;
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        color: #1f2937;
+        background: #ebebeb;
+        background: linear-gradient(0deg,rgba(235, 235, 235, 1) 0%, rgba(237, 237, 237, 1) 100%);
+        border-radius: 10px;
+        font-weight: 600;
+        transition: 0.4s ease-out;
+        position: relative;
+        &:hover {
+            background: #d1d1d1;
+            background: linear-gradient(0deg,rgba(209, 209, 209, 1) 0%, rgba(237, 237, 237, 1) 100%);
+            span{
+                display: flex;
+                animation: opacidade 0.4s ease-out forwards;
+            }
+        }
+
+        &:active {
+            display: flex;
+        }
+    }
+
+    span {
+        display: none;
+        right: 10px;
+        font-size: 35px;
+        height: 60px;
+        position: absolute;
+        color: rgb(0, 183, 255);
+        border: 0;
+        outline: 0;
+        opacity: 0;
+
+    }
+
+    @keyframes opacidade {
+
+        from{
+            opacity: 0;
+        }
+        to{
+            opacity: 1;
+        }
+        
+    }
+}

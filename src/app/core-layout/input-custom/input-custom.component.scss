@@ -1,0 +1,43 @@
+:host {
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    label{
+        display: flex;
+        flex-direction: column;
+        color: #bdbdbd;
+        height: 60px;
+        align-items: start;
+        font-weight: 600;
+    }
+
+    input{
+        border-radius: 10px;
+        padding: 0.3em;
+        width: 100%;
+        color: #bdbdbd;
+        border: 2px solid #bdbdbd;
+        box-sizing: border-box;
+        transition: 0.4s ease-in-out;
+
+        &::placeholder {
+        color: #bdbdbd;
+        }
+
+        &:focus {
+            border: 2px solid #3b6b8b;
+        }
+
+        &:hover {
+            border: 2px solid #3b6b8b;
+            background-color: #212121;
+            color: whitesmoke;
+        }
+
+        &.ng-invalid.ng-touched{
+            border: 2px solid rgb(173, 26, 26);
+        }
+    }
+}

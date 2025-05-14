@@ -1,0 +1,38 @@
+<app-layout-page-main title="Presenca" labelInput="Pesquisar presenca" placeHolderInput="Insira id ou nome" nameRegister="Add. presenca" (outPutAddRole)="modalAdd.open()">
+    <section>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Nome funcionario</th>
+                <th>Nome obra</th>
+                <th>Data presenca</th>
+                <th>Presenca</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Wesley Lorran</td>
+                <td>Alphaville</td>
+                <td>28/04/2025</td>
+                <td>Presente</td>
+                <td><button class="btn-edit btn-table" style="height: 38px;"><span class="material-symbols-sharp">
+                    edit
+                </span></button></td>
+                <td><button class="btn-delete btn-table" style="height: 38px;"><span class="material-symbols-sharp">
+                    delete
+                </span></button></td>
+            </tr>
+        </table>
+    </section>
+    <app-dialog #modalAdd title="Registrar cargo">
+        <form class="register-role">
+            <app-input-custom labelInput="Nome do cargo" type="text" placeholder="Insira o nome do funcionario"/>
+            <app-input-custom labelInput="Valor mensal" type="number" placeholder="Insira o id do cargo"/>
+            <div class="btns-dialog">
+                <button class="btn btn-save">Cadastrar</button>
+                <button class="btn btn-delete">Fechar</button>
+            </div>
+        </form>
+    </app-dialog>
+</app-layout-page-main>

@@ -1,0 +1,14 @@
+.btns-dialog {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5em;
+    button {
+        width: 100px;
+    }
+}
+
+.register-content-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}

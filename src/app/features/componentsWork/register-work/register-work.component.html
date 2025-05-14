@@ -1,0 +1,151 @@
+<main>
+    <h1 class="title">Obra</h1>
+    <input #date class="date-tools-work" type="date" value="{{today()}}" (change)="changeDay(date.value);">
+    <section class="container-data-work">
+        <div class="data-work">
+            <div class="data-work-inputs">
+                <form class="data-work-form" [formGroup]="formWork">
+                    <div>
+                        <app-input-custom labelInput="Nome da obra:" type="text" placeholder="Insira o nome da obra" [control]="getControl('nameWork')" [required]="true"/>
+                        <app-input-custom labelInput="Inicio da obra:" type="date" [control]="getControl('startWork')" [required]="true"/>
+                        <app-input-custom labelInput="Previsão termino da obra:" type="date" [control]="getControl('finalWork')" [required]="true"/>
+                        <app-input-custom labelInput="Valor bruto:" type="number" placeholder="Insira o valor bruto" [control]="getControl('grossValue')" [required]="true"/>
+                    </div>
+                    <div>
+                        <app-input-custom labelInput="Rua:" type="text" placeholder="Insira o nome da rua" [control]="getControl('street')" [required]="true"/>
+                        <app-input-custom labelInput="Bairro:" type="text" placeholder="Insira o nome do bairro" [control]="getControl('district')" [required]="true"/>
+                        <app-input-custom labelInput="City:" type="text" placeholder="Insira o nome da cidade" [control]="getControl('city')" [required]="true"/>
+                        <app-input-custom labelInput="Número:" type="text" placeholder="Insira o número da obra" [control]="getControl('number')" [required]="true"/>
+                        <app-input-custom labelInput="Cep:" type="text" placeholder="Insira o cep" [control]="getControl('cep')" [required]="true"/>
+                    </div>
+                </form>
+                <div class="btns-work">
+                    <button class="btn btn-save" [disabled]="!formWork.valid" (click)="submitCreateWork()">{{buttonSubmit()}}</button>
+                    <button class="btn btn-pay">Pagar trablho empreita</button>
+                    <button class="btn btn-pay" (click)="modalPaymentEmployee.open()">Pagar funcionários da obra</button>
+                </div>
+            </div>
+            <hr>
+            <div class="data-work-extra-work">
+                <div class="list-drag"
+                cdkDropList
+                #extraWorkList="cdkDropList"
+                id="extraWorkList"
+                [cdkDropListData]="employeeExtraWork"
+                [cdkDropListConnectedTo]="[employeeList]"
+                (cdkDropListDropped)="drop($event)">
+                <h1 class="title-absolute">Trabalho Extra</h1>
+                @for (item of employeeExtraWork; track item) {
+                    @if (employeeExtraWork.length != 0) {
+                        <div style="display: flex; width: 100%; align-items: center;">
+                            <div class="line-employee" cdkDrag>
+                                <img src="../../../../assets/person.png"  alt="">
+                                <p>{{item.nameEmployee}}</p>
+                            </div>
+                            <button class="btn btn-delete" style="margin: 0 0.5em 0 0;" (click)="modalDeleteExtraWork.open(); IdDeleteDialog = item.id">X</button>
+                        </div>
+                    }
+                }
+                </div>
+                <button class="btn btn-save" style="margin: 0 1em;" (click)="modalSaveExtraWork.open()">Salvar Extra Work</button>
+            </div>
+            <hr>
+            <div class="data-work-presence">
+                <div class="list-drag"
+                cdkDropList
+                #employeePresenceList="cdkDropList"
+                id="employeePresenceList"
+                [cdkDropListData]="employeePresence"
+                [cdkDropListConnectedTo]="[employeeList]"
+                (cdkDropListDropped)="drop($event)">
+                <h1 class="title-absolute">Presença</h1>
+                @for (item of employeePresence; track item) {
+                    @if (employeePresence.length != 0) {
+                        <div style="display: flex; width: 100%; align-items: center;">
+                            <div class="line-employee" cdkDrag>
+                                <img src="../../../../assets/person.png"  alt="">
+                                <p>{{item.nameEmployee}}</p>
+                            </div>
+                            <button class="btn btn-delete" style="margin: 0 0.5em 0 0;" (click)="modalDeletePresence.open(); IdDeleteDialog = item.id">X</button>
+                        </div>
+                    }
+                }
+                </div>
+                <button class="btn btn-save" style="margin: 0 1em;" (click)="modalSavePresence.open()">Salvar presenca</button>
+            </div>
+        </div>
+        <div class="employee" 
+        cdkDropList
+        #employeeList="cdkDropList"
+        id="employeeList"
+        [cdkDropListData]="employee"
+        [cdkDropListConnectedTo]="[employeePresenceList, extraWorkList]"
+        (cdkDropListDropped)="drop($event)">
+            <h1 class="title-absolute">Funcionários</h1>
+            @for (item of employee; track item) {
+                <div class="line-employee" cdkDrag>
+                    <img src="../../../../assets/person.png" alt="">
+                    <p>{{item.nameEmployee}}</p>
+                </div>
+            }
+   
+        </div>
+    </section>
+    <section class="container-features-work">
+        <div class="features-work">
+            <app-revenue [workId]="idEdit()"/>
+            <app-expense [workId]="idEdit()"/>
+            <app-work-report [workId]="idEdit()"/>
+        </div>
+    </section>
+</main>
+
+<app-dialog #modalPaymentEmployee title="Pagar funcionários">
+    <form class="register-content-dialog" [formGroup]="formPaymentEmployee">
+        <app-input-custom labelInput="Descricao pagamento funcionários" type="text" placeholder="Insira a descricao" [control]="getControlPaymentEmployee('descriptionPayment')" [required]="true"/>
+        <app-input-custom labelInput="Data inicio" type="date" placeholder="Insira a data" [control]="getControlPaymentEmployee('startDate')" [required]="true"/>
+        <app-input-custom labelInput="Data final" type="date" placeholder="Insira o valor" [control]="getControlPaymentEmployee('finalDate')" [required]="true"/>
+        <div class="btns-dialog">
+            <button class="btn btn-save" [disabled]="!formPaymentEmployee.valid" (click)="submitPaymentEmployeeAll()">Pagar</button>
+            <button class="btn btn-delete" (click)="modalPaymentEmployee.close()">Fechar</button>
+        </div>
+    </form>
+</app-dialog>
+
+<app-dialog #modalSaveExtraWork title="Registrar empreitada">
+    <form class="register-content-dialog" [formGroup]="formExtraWork">
+        <app-input-custom labelInput="Descricao do servico" type="text" placeholder="Insira a descricao" [control]="getControlExtraWork('descriptionExtraWork')" [required]="true"/>
+        <app-input-custom labelInput="Data do servico" type="date" placeholder="Insira a data" [control]="getControlExtraWork('dateExtraWork')" [required]="true"/>
+        <app-input-custom labelInput="Pagamento do servico" type="number" placeholder="Insira o valor" [control]="getControlExtraWork('paymentExtraWork')" [required]="true"/>
+        <div class="btns-dialog">
+            <button class="btn btn-save" [disabled]="!formExtraWork.valid" (click)="submitRegisterExtraWork(modalSaveExtraWork)">{{ buttonSubmit() }}</button>
+            <button class="btn btn-delete" (click)="modalSaveExtraWork.close()">Fechar</button>
+        </div>
+    </form>
+</app-dialog>
+
+<app-dialog #modalSavePresence title="Registrar presenca">
+    <form class="register-content-dialog" [formGroup]="formPresence">
+        <app-input-custom labelInput="Data presenca" type="date" [control]="getControlPresence('dayPresence')" [required]="true"/>
+        <div class="btns-dialog">
+            <button class="btn btn-save" [disabled]="!formPresence.valid" (click)="submitRegisterPresence(modalSavePresence)">{{ buttonSubmit() }}</button>
+            <button class="btn btn-delete" (click)="modalSavePresence.close()">Fechar</button>
+        </div>
+    </form>
+</app-dialog>
+
+<!--DialogsDelete-->
+
+<app-dialog #modalDeleteExtraWork title="Deseja excluir essa funcionario da empreita">
+    <div class="btns-dialog">
+        <button class="btn btn-save" (click)="deleteEmployeeOfExtraWork(modalDeleteExtraWork)">Sim</button>
+        <button class="btn btn-delete" (click)="modalDeleteExtraWork.close()">Não</button>
+    </div>
+</app-dialog>
+
+<app-dialog #modalDeletePresence title="Deseja excluir essa funcionario presença">
+    <div class="btns-dialog">
+        <button class="btn btn-save" (click)="deleteEmployeeOfPresence(modalDeletePresence)">Sim</button>
+        <button class="btn btn-delete" (click)="modalDeletePresence.close()">Não</button>
+    </div>
+</app-dialog>

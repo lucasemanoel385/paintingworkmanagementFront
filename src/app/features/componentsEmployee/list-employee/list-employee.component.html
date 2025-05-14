@@ -1,0 +1,36 @@
+<app-layout-page-main title="Funcionarios" labelInput="Pesquisar funcionario" placeHolderInput="Insira id ou nome" nameRegister="Add. Funcionario" (outPutAddRole)="modalAdd.open()" (searchInput)="searchL.set($event)">
+    <section>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Nome funcionario</th>
+                <th>Nome cargo</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @for (item of getListEmployee()?.content; track $index) {
+                <tr>
+                    <td>{{item.employeeId}}</td>
+                    <td>{{item.nameEmployee}}</td>
+                    <td>{{item.roleId}}</td>
+                    <td><button class="btn-edit btn-table" style="height: 38px;"><span class="material-symbols-sharp">
+                        edit
+                    </span></button></td>
+                    <td><button class="btn-delete btn-table" style="height: 38px;"><span class="material-symbols-sharp">
+                        delete
+                    </span></button></td>
+                </tr>    
+            }
+        </table>
+    </section>
+    <app-dialog #modalAdd title="Registrar cargo">
+        <form class="register-role" [formGroup]="employeeForm">
+            <app-input-custom labelInput="Nome do funcionario" type="text" placeholder="Insira o nome do funcionario" [control]="getControl('nameEmployee')" [required]="true"/>
+            <app-input-custom labelInput="Id do cargo" type="number" placeholder="Insira o id do cargo" [control]="getControl('roleId')" [required]="true"/>
+            <div class="btns-dialog">
+                <button class="btn btn-save" [disabled]="!employeeForm.valid" (click)="submitCreateEmployee()">{{buttonSubmit()}}</button>
+                <button class="btn btn-delete" (click)="modalAdd.close()">Fechar</button>
+            </div>
+        </form>
+    </app-dialog>
+</app-layout-page-main>

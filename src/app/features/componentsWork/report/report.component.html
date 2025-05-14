@@ -1,0 +1,222 @@
+<main>
+    <section class="container-report-tools">
+        <div class="date-for-date">
+            <input #dateStart type="date" (change)="startDate.set(dateStart.value)">
+            <p>Até</p>
+            <input #dateFinal type="date" (change)="finalDate.set(dateFinal.value)">
+            <button class="btn btn-save" style="height: 40px;" (click)="searchReportForDate()">Pesquisar</button>
+        </div>
+        <div class="container-employee-tools">
+            <div class="employee-extra-work">
+                <h3>Servicos Extras</h3>
+                <div class="table_container">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Descricao empreitada
+                            </th>
+                            <th>
+                                Func.
+                            </th>
+                            <th>
+                                Data
+                            </th>
+                            <th>
+                                Valor
+                            </th>
+                        </tr>
+                        @for (item of viewAllReport$.extraWorkList; track $index) {
+                            <tr>
+                                <td>
+                                    {{item.descriptionExtraWork}}
+                                </td>
+                                <td>
+                                    {{item.employeeName}}
+                                </td>
+                                <td>
+                                    {{item.dateExtraWork | date: 'dd/MM/yyyy'}}
+                                </td>
+                                <td>
+                                    {{item.paymentExtraWork | currency : 'BRL'}}
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <h4 style="padding: 0.5em 0; background-color: rgb(4, 77, 173);">Total empreitada: {{viewAllReport$.totalExtraWork | currency : 'BRL'}}</h4>
+            </div>
+            <hr>
+            <div class="employee-payment">
+                <h3>Pagamentos</h3>
+                <div class="table_container">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Nome Func.
+                            </th>
+                            <th>
+                                Data inicio
+                            </th>
+                            <th>
+                                Data final
+                            </th>
+                            <th>
+                                Valor
+                            </th>
+                        </tr>
+                        @for (item of viewAllReport$.paymentList; track $index) {
+                            <tr>
+                                <td>
+                                    {{item.descriptionPayment}}
+                                </td>
+                                <td>
+                                    {{item.startDate | date: 'dd/MM/yyyy'}}
+                                </td>
+                                <td>
+                                    {{item.finalDate | date: 'dd/MM/yyyy'}}
+                                </td>
+                                <td>
+                                    {{item.valuePay | currency : 'BRL'}}
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <h4 style="padding: 0.5em 0; background-color: rgb(4, 77, 173);">Total pago: {{viewAllReport$.totalPayment | currency : 'BRL'}}</h4>
+            </div>
+        </div>
+        <hr>
+        <div class="container-work-tools">
+            <div class="work-revenue">
+                <h3>Receitas</h3>
+                <div class="table_container">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Descricao
+                            </th>
+                            <th>
+                                Data
+                            </th>
+                            <th>
+                                Valor
+                            </th>
+                        </tr>
+                        @for (item of viewAllReport$.revenueList; track $index) {
+                            <tr>
+                                <td>
+                                    {{item.descriptionRevenue}}
+                                </td>
+                                <td>
+                                    {{item.dateRevenue | date: 'dd/MM/yyyy'}}
+                                </td>
+                                <td>
+                                    {{item.valueEntry | currency : 'BRL'}}
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <h4 style="padding: 0.5em 0; background-color: rgb(4, 77, 173);">Total despesa: {{viewAllReport$.totalRevenue | currency : 'BRL'}}</h4>
+            </div>
+            <hr>
+            <div class="work-expense">
+                <h3>Despesas</h3>
+                <div class="table_container">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Descricao
+                            </th>
+                            <th>
+                                Data
+                            </th>
+                            <th>
+                                Valor
+                            </th>
+                        </tr>
+                        @for (item of viewAllReport$.expensesList; track $index) {
+                            <tr>
+                                <td>
+                                    {{item.descriptionExpenses}}
+                                </td>
+                                <td>
+                                    {{item.dateExpense | date: 'dd/MM/yyyy'}}
+                                </td>
+                                <td>
+                                    {{item.valueExpenses | currency : 'BRL'}}
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <h4 style="padding: 0.5em 0; background-color: rgb(4, 77, 173);">Total despesa: {{viewAllReport$.totalExpense | currency : 'BRL'}}</h4>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section class="container-report-result">
+        <div class="payment-employee">
+            <h3>Pagamento funcionarios</h3>
+            <hr>
+            <div class="table_container">
+                <table class="table">
+                    <tr>
+                        <th>
+                            Nome Func.
+                        </th>
+                        <th>
+                            Data inicio
+                        </th>
+                        <th>
+                            Data final
+                        </th>
+                        <th>
+                            Receber Valor
+                        </th>
+                    </tr>
+                    @for (item of viewAllReport$.paymentEmployeeList; track $index) {
+                        <tr>
+                            <td>
+                                {{item.nameEmployee}}
+                            </td>
+                            <td>
+                                {{startDate() | date: 'dd/MM/yyyy'}}
+                            </td>
+                            <td>
+                                {{finalDate() | date: 'dd/MM/yyyy'}}
+                            </td>
+                            <td>
+                                {{item.valueReceive | currency: 'BRL'}}
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <h3>Resultado</h3>
+            <div class="report-result">
+                <p style="display: flex; justify-content: space-between;">
+                    Valor bruto: <span style="color: rgb(54, 255, 47); font-weight: 600;">{{viewAllReport$.totalRevenue | currency : 'BRL'}}</span>
+                </p>
+                <hr>
+                <p style="display: flex; justify-content: space-between;">
+                    Servicos extras: <span style="color: red; font-weight: 600;">{{viewAllReport$.totalExtraWork | currency : 'BRL'}}</span>
+                </p>
+                <hr>
+                <p style="display: flex; justify-content: space-between;">
+                    Pagamentos: <span style="color: red; font-weight: 600;">{{viewAllReport$.totalPayment | currency : 'BRL'}}</span>
+                </p>
+                <hr>
+                <p style="display: flex; justify-content: space-between;">
+                    Despesas: <span style="color: red; font-weight: 600;">{{viewAllReport$.totalExpense | currency : 'BRL'}}</span>
+                </p>
+                <hr>
+                <p style="display: flex; justify-content: space-between;">
+                    Valor liquido: <span style="color: rgb(54, 255, 47); font-weight: 600;">{{viewAllReport$.totalLiquid | currency : 'BRL'}}</span>
+                </p>
+                <hr>
+            </div>
+     
+    </section>
+</main>

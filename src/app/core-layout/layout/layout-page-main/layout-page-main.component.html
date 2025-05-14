@@ -1,0 +1,18 @@
+<main>
+    <h1 class="title">{{ title }}</h1>
+    <section class="layout-header">
+        <div class="layout-header-search">
+            <app-input-custom #inputSearch 
+            [labelInput]="labelInput"
+            [placeholder]="placeHolderInput"
+            type="text"
+            (outputSearch)="contentInputSearch.set($event)"
+            />
+            <button class="btn btn-save" (click)="emitSearch()">Pesquisar</button>
+        </div>
+        <button class="search btn btn-save" (click)="emitInput()">{{ nameRegister }}</button>
+    </section>
+    <section>
+        <ng-content></ng-content>
+    </section>
+</main>

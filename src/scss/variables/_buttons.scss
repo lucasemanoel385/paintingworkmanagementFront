@@ -1,0 +1,71 @@
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.7em;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #d1d1d1;
+    box-shadow: 1px 0px 10px 0px #1e1e2f;
+    outline: 0;
+    transition: 0.3s;
+}
+
+.btn-table {
+
+    padding: 0.4em;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #d1d1d1;
+    box-shadow: 1px 0px 10px 0px #1e1e2f;
+    outline: 0;
+    transition: 0.3s;
+}
+
+.btn-save {
+    background-color: #167bf7;
+
+    &:hover {
+        background-color: #114c94;
+    }  
+    &:disabled {
+        background-color: grey;
+        cursor: default;
+    }
+
+}
+
+.btn-pay {
+    background-color: #0a9c1d;
+
+    &:hover {
+        background-color: #0e661a;
+    }
+
+    &:disabled {
+        background-color: grey;
+        cursor: default;
+    }
+    
+}
+
+.btn-delete {
+    background-color: #f00c0c;
+
+    &:hover {
+        background-color: #ad0000;
+    } 
+    &:disabled {
+        background-color: grey;
+        cursor: default;
+    }
+    
+}
+
+.btn-edit {
+    background-color: grey;
+
+    &:hover {
+        background-color: #525252;
+    } 
+}

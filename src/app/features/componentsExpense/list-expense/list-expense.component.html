@@ -1,0 +1,40 @@
+<app-layout-page-main title="Despesa" labelInput="Pesquisar despesa" placeHolderInput="Insira id ou nome" nameRegister="Add. Despesa" (outPutAddRole)="modalAdd.open()" (searchInput)="searchL.set($event)">
+    <section>
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Descricao despesa</th>
+                <th>Data da despesa</th>
+                <th>Valor da despesa</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @for (item of getListExpense()?.content; track $index) {
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.descriptionExpenses}}</td>
+                    <td>{{item.dateExpense | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{item.valueExpenses | currency: 'BRL'}}</td>
+                    <td><button class="btn-edit btn-table" style="height: 38px;"><span class="material-symbols-sharp">
+                        edit
+                    </span></button></td>
+                    <td><button class="btn-delete btn-table" style="height: 38px;"><span class="material-symbols-sharp">
+                        delete
+                    </span></button></td>
+                </tr>    
+            }
+        </table>
+    </section>
+    <app-dialog #modalAdd title="Registrar cargo">
+        <form class="register-role" [formGroup]="formExpense">
+            <app-input-custom labelInput="Descricao despesa" type="text" placeholder="gasolina" [control]="getControl('descriptionExpenses')" [required]="true"/>
+            <app-input-custom labelInput="Data despesa" type="date" placeholder="Insira o nome do funcionario" [control]="getControl('dateExpense')" [required]="true"/>
+            <app-input-custom labelInput="Valor da despesa" type="number" placeholder="400" [control]="getControl('valueExpenses')" [required]="true"/>
+            <app-input-custom labelInput="Obra da despesa" type="number" placeholder="1 ou 2" [control]="getControl('workId')"/>
+            <div class="btns-dialog">
+                <button class="btn btn-save" [disabled]="!formExpense.valid" (click)="submitCreateExpense(modalAdd)">Cadastrar</button>
+                <button class="btn btn-delete" (click)="modalAdd.close()">Fechar</button>
+            </div>
+        </form>
+    </app-dialog>
+</app-layout-page-main>

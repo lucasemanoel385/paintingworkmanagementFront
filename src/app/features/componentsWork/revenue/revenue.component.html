@@ -1,0 +1,48 @@
+<div class="revenue-work">
+    <h1 class="title-absolute">Receita</h1>
+    <div class="table_container">
+        <table class="table">
+            <tr>
+                <th>Descricao</th>
+                <th>Data</th>
+                <th>Valor</th>
+                <th></th>
+            </tr>
+            @for (item of listRevenue$; track $index) {
+                <tr>
+                    <td>
+                        {{item.descriptionRevenue}}
+                    </td>
+                    <td>
+                        {{item.dateRevenue | date : 'dd/MM/yyyy'}}
+                    </td>
+                    <td>
+                        {{ item.valueEntry | currency : 'BRL'}}
+                    </td>
+                    <td>
+                        <button class="btn btn-delete" (click)="modalDeleteRevenue.open(); idDeleteRevenue = item.id">Excluir</button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <button class="btn-save btn" style="margin: 0em 1em;" (click)="modalRevenue.open()">Add. Receita</button>
+    <app-dialog #modalRevenue title="Registrar receita"> 
+        <form class="register-content-dialog" [formGroup]="formRevenue">
+            <app-input-custom labelInput="Descricao da receita" placeholder="Pagamento cliente" type="text" [control]="getControl('descriptionRevenue')" [required]="true"/>
+            <app-input-custom labelInput="Insira o valor da receita" placeholder="100" type="number" [control]="getControl('valueEntry')" [required]="true"/>
+            <app-input-custom labelInput="Data da receita" type="date" [control]="getControl('dateRevenue')" [required]="true"/>
+            <div class="btns-dialog">
+                <button class="btn btn-save" type="button" [disabled]="!formRevenue.valid" (click)="submitRegisterRevenue()">Salvar</button>
+                <button class="btn btn-delete" type="button" (click)="modalRevenue.close()">Fechar</button>
+            </div>
+        </form>
+    </app-dialog>
+</div>
+
+<app-dialog #modalDeleteRevenue title="Deseja excluir receita">
+    <div class="btns-dialog">
+        <button class="btn btn-save" (click)="deleteRevenue()">Sim</button>
+        <button class="btn btn-delete" (click)="modalDeleteRevenue.close()">Não</button>
+    </div>
+</app-dialog>

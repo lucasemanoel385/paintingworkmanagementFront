@@ -1,0 +1,48 @@
+<div class="expense-work">
+    <h1 class="title-absolute">Despesas</h1>
+    <div class="table_container">
+        <table class="table">
+            <tr>
+                <th>Descricao</th>
+                <th>Data</th>
+                <th>Valor</th>
+                <th></th>
+            </tr>
+            @for (item of listExpense$; track $index) {
+                <tr>
+                    <td>
+                        {{item.descriptionExpenses}}
+                    </td>
+                    <td>
+                        {{item.dateExpense | date : 'dd/MM/yyyy'}}
+                    </td>
+                    <td>
+                        {{item.valueExpenses | currency: 'BRL'}}
+                    </td>
+                    <td>
+                        <button class="btn btn-delete" (click)="modalDeleteExpense.open(); idDeleteExpense = item.id">Excluir</button>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <button class="btn-delete btn" style="margin: 0em 1em;" (click)="modalExpense.open()">Add. Despesa</button>
+    <app-dialog #modalExpense title="Registrar despesa"> 
+        <form class="register-content-dialog">
+            <app-input-custom labelInput="Descricao da despesa" placeholder="Gasolina" type="text" [control]="getControl('descriptionExpenses')" [required]="true"/>
+            <app-input-custom labelInput="Insira o valor da despesa" placeholder="100" type="number" [control]="getControl('valueExpenses')" [required]="true"/>
+            <app-input-custom labelInput="Data da despesa" type="date" [control]="getControl('dateExpense')" [required]="true"/>
+            <div class="btns-dialog">
+                <button class="btn btn-save" type="button" [disabled]="!formExpense.valid" (click)="submitRegisterExpense()">Salvar</button>
+                <button class="btn btn-delete" type="button" (click)="modalExpense.close()">Fechar</button>
+            </div>
+        </form>
+    </app-dialog>
+</div>
+
+<app-dialog #modalDeleteExpense title="Deseja excluir despesa">
+    <div class="btns-dialog">
+        <button class="btn btn-save" (click)="deleteExpenseByid()">Sim</button>
+        <button class="btn btn-delete" (click)="modalDeleteExpense.close()">Não</button>
+    </div>
+</app-dialog>
