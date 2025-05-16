@@ -21,7 +21,6 @@
                 </form>
                 <div class="btns-work">
                     <button class="btn btn-save" [disabled]="!formWork.valid" (click)="submitCreateWork()">{{buttonSubmit()}}</button>
-                    <button class="btn btn-pay">Pagar trablho empreita</button>
                     <button class="btn btn-pay" (click)="modalPaymentEmployee.open()">Pagar funcionários da obra</button>
                 </div>
             </div>
@@ -34,7 +33,7 @@
                 [cdkDropListData]="employeeExtraWork"
                 [cdkDropListConnectedTo]="[employeeList]"
                 (cdkDropListDropped)="drop($event)">
-                <h1 class="title-absolute">Trabalho Extra</h1>
+                <h1 class="title-absolute">Empreitada</h1>
                 @for (item of employeeExtraWork; track item) {
                     @if (employeeExtraWork.length != 0) {
                         <div style="display: flex; width: 100%; align-items: center;">
@@ -47,7 +46,7 @@
                     }
                 }
                 </div>
-                <button class="btn btn-save" style="margin: 0 1em;" (click)="modalSaveExtraWork.open()">Salvar Extra Work</button>
+                <button class="btn btn-save" style="margin: 0 1em;" (click)="modalSaveExtraWork.open()">Salvar empreitada</button>
             </div>
             <hr>
             <div class="data-work-presence">
@@ -71,7 +70,7 @@
                     }
                 }
                 </div>
-                <button class="btn btn-save" style="margin: 0 1em;" (click)="modalSavePresence.open()">Salvar presenca</button>
+                <button class="btn btn-save" style="margin: 0 1em;" (click)="modalSavePresence.open()">Salvar presença</button>
             </div>
         </div>
         <div class="employee" 
@@ -114,9 +113,9 @@
 
 <app-dialog #modalSaveExtraWork title="Registrar empreitada">
     <form class="register-content-dialog" [formGroup]="formExtraWork">
-        <app-input-custom labelInput="Descricao do servico" type="text" placeholder="Insira a descricao" [control]="getControlExtraWork('descriptionExtraWork')" [required]="true"/>
-        <app-input-custom labelInput="Data do servico" type="date" placeholder="Insira a data" [control]="getControlExtraWork('dateExtraWork')" [required]="true"/>
-        <app-input-custom labelInput="Pagamento do servico" type="number" placeholder="Insira o valor" [control]="getControlExtraWork('paymentExtraWork')" [required]="true"/>
+        <app-input-custom labelInput="Descrição do serviço" type="text" placeholder="Insira a descricao" [control]="getControlExtraWork('descriptionExtraWork')" [required]="true"/>
+        <app-input-custom labelInput="Data do serviço" type="date" placeholder="Insira a data" [control]="getControlExtraWork('dateExtraWork')" [required]="true"/>
+        <app-input-custom labelInput="Pagamento do serviço" type="number" placeholder="Insira o valor" [control]="getControlExtraWork('paymentExtraWork')" [required]="true"/>
         <div class="btns-dialog">
             <button class="btn btn-save" [disabled]="!formExtraWork.valid" (click)="submitRegisterExtraWork(modalSaveExtraWork)">{{ buttonSubmit() }}</button>
             <button class="btn btn-delete" (click)="modalSaveExtraWork.close()">Fechar</button>
@@ -124,9 +123,9 @@
     </form>
 </app-dialog>
 
-<app-dialog #modalSavePresence title="Registrar presenca">
+<app-dialog #modalSavePresence title="Registrar presença">
     <form class="register-content-dialog" [formGroup]="formPresence">
-        <app-input-custom labelInput="Data presenca" type="date" [control]="getControlPresence('dayPresence')" [required]="true"/>
+        <app-input-custom labelInput="Data presença" type="date" [control]="getControlPresence('dayPresence')" [required]="true"/>
         <div class="btns-dialog">
             <button class="btn btn-save" [disabled]="!formPresence.valid" (click)="submitRegisterPresence(modalSavePresence)">{{ buttonSubmit() }}</button>
             <button class="btn btn-delete" (click)="modalSavePresence.close()">Fechar</button>

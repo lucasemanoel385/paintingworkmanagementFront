@@ -8,7 +8,7 @@
         </div>
         <div class="container-employee-tools">
             <div class="employee-extra-work">
-                <h3>Servicos Extras</h3>
+                <h3>Empreitadas</h3>
                 <div class="table_container">
                     <table class="table">
                         <tr>
@@ -117,7 +117,7 @@
                         }
                     </table>
                 </div>
-                <h4 style="padding: 0.5em 0; background-color: rgb(4, 77, 173);">Total despesa: {{viewAllReport$.totalRevenue | currency : 'BRL'}}</h4>
+                <h4 style="padding: 0.5em 0; background-color: rgb(4, 77, 173); border-radius: 0 0 0 7px;">Total despesa: {{viewAllReport$.totalRevenue | currency : 'BRL'}}</h4>
             </div>
             <hr>
             <div class="work-expense">
@@ -157,7 +157,7 @@
     <hr>
     <section class="container-report-result">
         <div class="payment-employee">
-            <h3>Pagamento funcionarios</h3>
+            <h3>Pagamento funcionários</h3>
             <hr>
             <div class="table_container">
                 <table class="table">
@@ -172,7 +172,7 @@
                             Data final
                         </th>
                         <th>
-                            Receber Valor
+                            Valor a receber
                         </th>
                     </tr>
                     @for (item of viewAllReport$.paymentEmployeeList; track $index) {
@@ -201,7 +201,7 @@
                 </p>
                 <hr>
                 <p style="display: flex; justify-content: space-between;">
-                    Servicos extras: <span style="color: red; font-weight: 600;">{{viewAllReport$.totalExtraWork | currency : 'BRL'}}</span>
+                    Valor da empreitada: <span style="color: red; font-weight: 600;">{{viewAllReport$.totalExtraWork | currency : 'BRL'}}</span>
                 </p>
                 <hr>
                 <p style="display: flex; justify-content: space-between;">
@@ -213,7 +213,7 @@
                 </p>
                 <hr>
                 <p style="display: flex; justify-content: space-between;">
-                    Valor liquido: <span style="color: rgb(54, 255, 47); font-weight: 600;">{{viewAllReport$.totalLiquid | currency : 'BRL'}}</span>
+                    Valor líquido: <span style="color: rgb(54, 255, 47); font-weight: 600;">{{viewAllReport$.totalLiquid | currency : 'BRL'}}</span>
                 </p>
                 <hr>
             </div>
